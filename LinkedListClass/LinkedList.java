@@ -19,9 +19,13 @@ class Node {
 
 public class LinkedList {
     private Node head;
+    private Node tail;
+
+    private int size;
 
     public LinkedList() {
-        head = null;
+        head = tail = null;
+        size = 0;
     }
 
     /**
@@ -29,8 +33,15 @@ public class LinkedList {
      * Returns null if the index is out of bounds.
      * @param index the passed index of the item you want to retrieve
      * @return the actual value by that index
+     * @throws Exception that tells us the bound of index is out
      */
-    public Object get(int index) { // index == 2
+    public Object get(int index) throws Exception { 
+        if (index >= size) {
+            throw new Exception("Haha index is out of bounds! Don't break me please");
+        }
+        if (index < 0) {
+            index += size;
+        }
         Node curr = head;
         for (int i = 0; i < index; i++) {
             curr = curr.next;
@@ -45,5 +56,21 @@ public class LinkedList {
      */
     public void addStart(Object item) {
         head = new Node(item, head);
+        size++;
+    }
+
+    /**
+     * This method adds the item to the end of the LinkedList.
+     * The tail will point to it internally.
+     * @param item any Object
+     */
+    public void add(Object item) {
+        // head = tail = (tail == null) ? new Node(item) : new Node(item);
+        if (tail == null) {
+            head = tail = new Node(item);
+        }
+        else {
+            tail = tail.next = new Node(item);
+        }
     }
 }
