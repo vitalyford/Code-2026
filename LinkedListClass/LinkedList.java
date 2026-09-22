@@ -1,25 +1,26 @@
 package LinkedListClass;
 
-class Node {
-    Object value;
-    Node next;
+// GENERICS
+class Node<Charizard> {
+    Charizard value;
+    Node<Charizard> next;
 
     // Overloading
 
-    public Node(Object value) {
+    public Node(Charizard value) {
         this.value = value;
         next = null;
     }
 
-    public Node(Object value, Node next) {
+    public Node(Charizard value, Node<Charizard> next) {
         this.value = value;
         this.next  = next;
     }
 }
 
-public class LinkedList {
-    private Node head;
-    private Node tail;
+public class LinkedList<Pokemon> {
+    private Node<Pokemon> head;
+    private Node<Pokemon> tail;
 
     private int size;
 
@@ -35,14 +36,14 @@ public class LinkedList {
      * @return the actual value by that index
      * @throws Exception that tells us the bound of index is out
      */
-    public Object get(int index) throws Exception { 
+    public Pokemon get(int index) throws Exception { 
         if (index >= size) {
             throw new Exception("Haha index is out of bounds! Don't break me please");
         }
         if (index < 0) {
             index += size;
         }
-        Node curr = head;
+        Node<Pokemon> curr = head;
         for (int i = 0; i < index; i++) {
             curr = curr.next;
         }
@@ -54,8 +55,8 @@ public class LinkedList {
      * This method adds to the BEGINNING of the LinkedList
      * @param item is an object that is added to the beginning
      */
-    public void addStart(Object item) {
-        head = new Node(item, head);
+    public void addStart(Pokemon item) {
+        head = new Node<Pokemon>(item, head);
         size++;
     }
 
@@ -64,13 +65,13 @@ public class LinkedList {
      * The tail will point to it internally.
      * @param item any Object
      */
-    public void add(Object item) {
+    public void add(Pokemon item) {
         // head = tail = (tail == null) ? new Node(item) : new Node(item);
         if (tail == null) {
-            head = tail = new Node(item);
+            head = tail = new Node<Pokemon>(item);
         }
         else {
-            tail = tail.next = new Node(item);
+            tail = tail.next = new Node<Pokemon>(item);
         }
     }
 }
