@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Factorial {
     public static int f(int n) {
         return (n <= 1) ? 1 : n * f(n - 1);
