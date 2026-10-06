@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Recursion {
     public static String reverse(String input) {
         // 1. on -> no
@@ -26,11 +28,32 @@ public class Recursion {
         hanoi(spare, dst, src, numOfRings - 1);
     }
 
-    public static void main(String[] args) {
-        System.out.println(
-            reverse("A Santa lived as a devil at NASA")
-        );
 
-        hanoi("A", "B", "C", 64);
+    // 1,1,2,3,5,8,13,21
+    // Memoization
+    public static long fib(long n, HashMap<Long, Long> store) {
+        if (n <= 2) return 1; // n = 10
+        
+        if (store.containsKey(n)) return store.get(n);
+
+        long firstResult  = fib(n - 1, store); // n - 1 = 9
+        long secondResult = fib(n - 2, store); // n - 2 = 8
+        
+        // for n = 9, I know the answer as firstResult
+        store.put(n - 1, firstResult);
+        // for n = 8, I know the answer as firstResult
+        store.put(n - 2, secondResult);
+
+        return firstResult + secondResult;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(fib(100, new HashMap<>()));
+
+        // System.out.println(
+        //     reverse("A Santa lived as a devil at NASA")
+        // );
+
+        // hanoi("A", "B", "C", 3);
     }
 }
