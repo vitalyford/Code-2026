@@ -1,0 +1,10 @@
+T -> W
+W -> S
+S -> T
+Y -> Z
+W -> Y
+Y -> R
+P -> R
+P -> W
+R -> X
+Q -> X
