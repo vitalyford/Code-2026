@@ -10,23 +10,18 @@ public class Fly {
         Scanner scFile = new Scanner(new File("Graph/input.txt"));
         Scanner scUser = new Scanner(System.in);
 
-        System.out.println("Enter from and to like: A B");
-
-        String start = scUser.next();
-        String end   = scUser.next();
-
         // The external arraylist holds references to our rows
-        //   and the internal arraylist holds the actual data.
+        // and the internal arraylist holds the actual data.
         // Each row (the internal arraylist's data) starts
-        //   with a source and follows with the rest of possible 
-        //   destinations. 
+        // with a source and follows with the rest of possible
+        // destinations.
         ArrayList<ArrayList<String>> data = new ArrayList<>();
 
         // Read the input from the file
         while (scFile.hasNextLine()) {
             String[] line = scFile
-                .nextLine()
-                .split(" -> ");
+                    .nextLine()
+                    .split(" -> ");
 
             String src = line[0];
             String dst = line[1];
@@ -34,7 +29,15 @@ public class Fly {
             insertIntoData(data, src, dst);
         }
 
-        findPath(data, start, end); // S to X
+        while (true) {
+            System.out.println("Enter from and to like: A B");
+
+            String start = scUser.next();
+            String end = scUser.next();
+
+            findPath(data, start, end); // S to X
+            System.out.println();
+        }
     }
 
     private static boolean checkIfStartAndEndExist(ArrayList<ArrayList<String>> data, String start, String end) {
@@ -77,8 +80,8 @@ public class Fly {
             // 3. Is where we are going the End?
             // 4. Make sure I have not been to the city I picked
             // 5. In case we are stuck/cannot go to another city,
-            //    I am going to pop where I am to follow my
-            //    previous breadcrumb (until I am no longer stuck)
+            // I am going to pop where I am to follow my
+            // previous breadcrumb (until I am no longer stuck)
             String curr = stack.peek();
 
             if (curr.equals(end)) {
@@ -87,9 +90,8 @@ public class Fly {
 
             visited.add(curr);
 
+            boolean foundNextCity = false;
             for (ArrayList<String> row : data) {
-                boolean foundNextCity = false;
-
                 if (row.get(0).equals(curr)) {
                     // Where can I go next?
                     for (int i = 1; i < row.size(); i++) {
@@ -101,11 +103,10 @@ public class Fly {
                         }
                     }
                 }
+            }
 
-                if (!foundNextCity) {
-                    stack.pop();
-                    break;
-                }
+            if (!foundNextCity) {
+                stack.pop();
             }
         } // end while loop
 
@@ -114,8 +115,7 @@ public class Fly {
             while (!stack.isEmpty()) {
                 System.out.print(stack.pop() + " <- ");
             }
-        }
-        else {
+        } else {
             System.out.println("No path found");
         }
     }
@@ -135,7 +135,7 @@ public class Fly {
 
         newRow.add(src);
         newRow.add(dst);
-        
+
         data.add(newRow);
     }
 }
