@@ -44,18 +44,18 @@ class Pet implements Comparable<Pet> {
 
 public class SortingExample {
     public static void main(String[] args) {
-        List<Pet> pets = new LinkedList<>();
+        PriorityQueue<Pet> pets = new PriorityQueue<>();
 
+        // log2(n) if n is a million items, then add()
+        // will take about 20 steps
         pets.add(new Pet("Bobby", 5));
         pets.add(new Pet("Alice", 5));
         pets.add(new Pet("Eve", 6));
-        pets.add(new Pet("Jane", 3));
         pets.add(new Pet("Terence", 2));
+        pets.add(new Pet("Jane", 3));
 
-        System.out.println(pets);
-
-        Collections.sort(pets);
-     
-        System.out.println(pets);
+        while (!pets.isEmpty()) {
+            System.out.println(pets.poll());
+        }
     }
 }
